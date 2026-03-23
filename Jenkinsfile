@@ -9,7 +9,6 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                // Unga sariyaana GitHub URL inga irukkanum
                 git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/ramyadharshinim737-cloud/insta-event-project.git'
             }
         }
@@ -18,8 +17,7 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker Images..."
-                    // Hyphen-ah remove pannitu space kudunga
-                    sh "docker compose build" 
+                    sh "docker compose build"
                 }
             }
         }
@@ -28,12 +26,9 @@ pipeline {
             steps {
                 script {
                     echo "Deploying Containers..."
-                    // Hyphen-ah remove pannitu space kudunga
                     sh "docker compose up -d"
                 }
             }
-        }
-            
         }
     }
 

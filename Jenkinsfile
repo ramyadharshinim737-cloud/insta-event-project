@@ -1,31 +1,44 @@
 pipeline {
     agent any
+
+    environment {
+        DOCKER_IMAGE_BACKEND = "linsta-backend"
+        DOCKER_IMAGE_FRONTEND = "linsta-frontend"
+    }
+
     stages {
         stage('Clone') {
-    steps {
-        // Intha URL-ah unga sariyaana repo URL-ku mathunga
-        git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/ramyadharshinim737-cloud/insta-event-project.git'
-    }
-}
+            steps {
+                // Unga sariyaana GitHub URL inga irukkanum
+                git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/ramyadharshinim737-cloud/insta-event-project.git'
+            }
         }
+
         stage('Build') {
             steps {
-                sh 'docker-compose build'
+                script {
+                    echo "Building Docker Images..."
+                    sh "docker-compose build"
+                }
             }
         }
+
         stage('Deploy') {
             steps {
-                sh 'docker-compose down || true'
-                sh 'docker-compose up -d'
+                script {
+                    echo "Deploying Containers..."
+                    sh "docker-compose up -d"
+                }
             }
         }
     }
+
     post {
         success {
-            echo '✅ Deployment Success!'
+            echo "✅ Deployment Success!"
         }
         failure {
-            echo '❌ Deployment Failed!'
+            echo "❌ Deployment Failed!"
         }
     }
 }

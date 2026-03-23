@@ -18,7 +18,8 @@ pipeline {
             steps {
                 script {
                     echo "Building Docker Images..."
-                    sh "docker-compose build"
+                    // Hyphen-ah remove pannitu space kudunga
+                    sh "docker compose build" 
                 }
             }
         }
@@ -27,9 +28,12 @@ pipeline {
             steps {
                 script {
                     echo "Deploying Containers..."
-                    sh "docker-compose up -d"
+                    // Hyphen-ah remove pannitu space kudunga
+                    sh "docker compose up -d"
                 }
             }
+        }
+            
         }
     }
 

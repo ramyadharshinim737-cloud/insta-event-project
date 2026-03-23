@@ -2,11 +2,11 @@ pipeline {
     agent any
     stages {
         stage('Clone') {
-            steps {
-                git branch: 'main',
-                    credentialsId: 'github-creds',
-                    url: 'https://github.com/cubeaisolutionstech/Insta-event1'
-            }
+    steps {
+        // Intha URL-ah unga sariyaana repo URL-ku mathunga
+        git branch: 'main', credentialsId: 'github-creds', url: 'https://github.com/ramyadharshinim737-cloud/insta-event-project.git'
+    }
+}
         }
         stage('Build') {
             steps {
